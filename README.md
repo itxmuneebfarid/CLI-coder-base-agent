@@ -1,4 +1,4 @@
-Project Report – AI-Powered Coder Agent CLI
+#Project Report – AI-Powered Coder Agent CLI
 1. Project Overview
 The AI-Powered Coder Agent CLI is a command-line interface tool designed to allow developers to interact with an AI coding assistant directly from the terminal.
 It supports:
@@ -137,3 +137,4 @@ Progress Indicators while AI processes requests.
 
 8. Conclusion
 The AI-Powered Coder Agent CLI is a robust, lightweight, and developer-friendly terminal-based AI tool. Its modular design, multi-mode support, and polished UI make it suitable for real-world coding assistance, educational use, and quick AI-powered development workflows.
+
