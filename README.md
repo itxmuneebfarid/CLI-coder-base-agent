@@ -58,7 +58,7 @@ load_agent() -> returns an object with .invoke({"messages":[...]}) -> response d
 Place the provided main.py in your project root (or adapt as needed).
 
 # How it works
-CLI → [ Argument parsing ] → chooses one of:
+ CLI → [ Argument parsing ] → chooses one of:
 
 Interactive loop: show banner → load agent → read user input → agent.invoke → print response
 
@@ -91,25 +91,37 @@ cli-coder-agent/
 Example main.py usage snippets
 Interactive: displays ASCII banner and colors (if colorama installed), keeps a loop until quit|exit|q.
 
-File mode: reads file content and treats entire content as the prompt.
-
-Future Improvements
-Command history and up-arrow navigation (readline on *nix, pyreadline or prompt_toolkit on Windows)
-
-Logging of prompts & responses (with opt-in privacy setting)
-
-
-
-Multiple agent backends (OpenAI, local LLMs, Google GenAI) selectable by flag
-
-Batch file processing and output formatting (JSON / markdown)
-
-Plugin system for code execution, formatting, or running linters
 
 # Credits
 AI backend: agent.load_agent() (user-provided — wire your preferred model)
 
 Project structure & orchestration: Python standard library (argparse, os, sys)
+# Future Advancements 
+Enhanced User Experience
+
+Command history with up-arrow recall
+
+Auto-completion for common commands
+
+Rich formatting for AI responses (syntax highlighting)
+
+Multi-Agent Support
+
+Switch between different AI backends (OpenAI, Anthropic, Google GenAI, Local LLMs) via CLI flags
+# Conclusion
+The CLI Coder-Based Agent is a robust, flexible, and user-friendly AI assistant designed for terminal enthusiasts and developers.
+Its modular architecture, multiple modes, and focus on speed make it well-suited for:
+
+Quick coding help
+
+Script automation
+
+AI-assisted development workflows
+
+By keeping dependencies minimal and the interface intuitive, it offers a practical balance between power and simplicity.
+
+
+
 
 
 
