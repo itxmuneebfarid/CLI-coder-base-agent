@@ -1,80 +1,24 @@
-# CLI Coder-Based Agent — AI-Powered Command Line Coding Assistant
-Convert terminal prompts into helpful coding answers, suggestions, and tooling support using a simple CLI built around an AI agent. Ideal for developers who prefer quick, keyboard-first interactions with an assistant while coding.
+# CLI Coder-Based Agent
+The CLI Coder-Based Agent is a terminal-based AI assistant designed for developers who want quick, keyboard-first coding help without leaving the command line.
+It can:
 
-# Features
-Interactive conversational CLI with welcome banner and colored output
+Answer coding questions
 
+Provide debugging suggestions
 
-# File mode: read prompt from a file and return AI response
+Explain code snippets
 
-Graceful handling of Ctrl+C / EOF and missing files
+Automate small code generation tasks
 
+This tool is lightweight, works across platforms (Windows, Linux, macOS), and supports three modes of use:
 
-# Requirements
-Python 3.8+
+Interactive Mode – continuous conversation with the AI agent.
 
-argparse, sys, os (standard)
+Single Query Mode – process a single coding question instantly.
 
+File Mode – read a prompt from a .txt file and process it.
 
-Your AI agent implementation exposing load_agent() and agent.invoke(...)
-
-(Optional) virtualenv or venv for an isolated environment
-
-# Example requirements.txt:
-
-nginx
-Copy
-Edit
-colorama
-plus whatever your agent needs, e.g.:
-openai
-langchain
- langchain-google-genai
-Setup Instructions
-# Create & activate a virtual environment
-macOS / Linux:
-bash
-Copy
-Edit
-python -m venv venv
-source venv/bin/activate
-Windows (PowerShell):
-
-powershell
-Copy
-Edit
-# python -m venv venv
-.\venv\Scripts\Activate.ps1
-Install dependencies:
-
-bash
-Copy
-Edit
-pip install -r requirements.txt
-Ensure your AI agent module is available and implements:
-# loading agent
-from agent import load_agent
-load_agent() -> returns an object with .invoke({"messages":[...]}) -> response dict
-Place the provided main.py in your project root (or adapt as needed).
-
-# How it works
- CLI → [ Argument parsing ] → chooses one of:
-
-Interactive loop: show banner → load agent → read user input → agent.invoke → print response
-
-Single-query: load agent → send single prompt → print response
-
-File-mode: read file → send its contents as prompt → print response
-
-Key flow:
-
-main() parses args with argparse
-
-Depending on args, calls interactive_mode(), single_query_mode() or file_mode()
-
-load_agent() is expected to initialize the AI backend (API keys, model, etc.)
-
-agent.invoke({"messages":[{...}]}) returns a response dict; last message content is printed
+By embedding an AI backend (loaded via load_agent() from agent.py), it provides intelligent responses directly in the CLI — making it especially useful for developers working over SSH or in minimal environments.
 
 # Project Structure (suggested)
 
@@ -93,11 +37,7 @@ cli-coder-agent/
 Example main.py usage snippets
 Interactive: displays ASCII banner and colors (if colorama installed), keeps a loop until quit|exit|q.
 
-
-# Credits
-AI backend: agent.load_agent() (user-provided — wire your preferred model)
-
-Project structure & orchestration: Python standard library (argparse, os, sys)
+)
 # Future Advancements 
 Enhanced User Experience
 
@@ -121,6 +61,7 @@ Script automation
 AI-assisted development workflows
 
 By keeping dependencies minimal and the interface intuitive, it offers a practical balance between power and simplicity.
+
 
 
 
