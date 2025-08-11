@@ -1,140 +1,164 @@
-#Project Report – AI-Powered Coder Agent CLI
-1. Project Overview
-The AI-Powered Coder Agent CLI is a command-line interface tool designed to allow developers to interact with an AI coding assistant directly from the terminal.
-It supports:
+CLI Coder-Based Agent — AI-Powered Command Line Coding Assistant
+Convert terminal prompts into helpful coding answers, suggestions, and tooling support using a simple CLI built around an AI agent. Ideal for developers who prefer quick, keyboard-first interactions with an assistant while coding.
 
-Interactive mode for back-and-forth conversations.
+Features
+Interactive conversational CLI with welcome banner and colored output
 
-Single query mode for one-time AI responses.
+Single-query mode (one-off prompts from command line)
 
-File mode for reading prompts from files.
+File mode: read prompt from a file and return AI response
 
-The tool is customizable, color-enhanced for better UX, and structured to support multiple operating systems.
+Graceful handling of Ctrl+C / EOF and missing files
 
-2. Objectives
-Provide developers with a fast, lightweight AI assistant without requiring a web interface.
+Colorized output using colorama with a plain-text fallback
 
-Support multiple modes of operation for flexibility.
+Version flag (--version) and cross-platform terminal-clear support
 
-Enhance the terminal experience with colors, ASCII art, and clear session controls.
+Requirements
+Python 3.8+
 
-Ensure cross-platform compatibility (Windows, Linux, macOS).
+argparse, sys, os (standard)
 
-3. Features
-Modes of Operation
-Interactive Mode (-i or default)
+colorama (optional but recommended)
 
-Starts a conversational session with the AI.
+Your AI agent implementation exposing load_agent() and agent.invoke(...)
 
-Supports commands: quit, exit, or q to end the session.
+(Optional) virtualenv or venv for an isolated environment
 
-Displays a stylized welcome screen.
+Example requirements.txt:
 
-Single Query Mode
+nginx
+Copy
+Edit
+colorama
+# plus whatever your agent needs, e.g.:
+# openai
+# langchain
+# langchain-google-genai
+Setup Instructions
+Create & activate a virtual environment
+macOS / Linux:
 
-Allows direct AI responses from a one-line prompt.
+bash
+Copy
+Edit
+python -m venv venv
+source venv/bin/activate
+Windows (PowerShell):
 
-Example:
+powershell
+Copy
+Edit
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+Install dependencies:
+
+bash
+Copy
+Edit
+pip install -r requirements.txt
+Ensure your AI agent module is available and implements:
+
+py
+Copy
+Edit
+from agent import load_agent
+# load_agent() -> returns an object with .invoke({"messages":[...]}) -> response dict
+Place the provided main.py in your project root (or adapt as needed).
+
+Running the App
+Interactive mode (default):
+
+bash
+Copy
+Edit
+python main.py
+# or
+python main.py -i
+Single query:
 
 bash
 Copy
 Edit
 python main.py "Explain Python decorators"
-File Mode (-f file.txt)
+File mode (read prompt from file):
 
-Reads a query from a text file.
-
-Processes the file content as the AI input.
-
-Additional Features
-Color Output using colorama (fallback to plain text if unavailable).
-
-ASCII Art Welcome Banner for branding and user engagement.
-
-Error Handling for missing files, keyboard interruptions, and invalid input.
-
-Version Control with --version argument.
-
-Cross-platform Screen Clear support.
-
-4. Technical Implementation
-Key Components
-argparse: For command-line argument parsing.
-
-colorama: For cross-platform color output.
-
-agent.load_agent(): Loads the AI agent for prompt processing.
-
-agent.invoke(): Sends user queries to the AI and returns results.
-
-os & sys: For file handling, terminal control, and system exits.
-
-Code Structure
-Utility Functions
-
-colored_print(): Unified function to print colored or plain text.
-
-show_welcome(): Displays ASCII art and clears the terminal.
-
-Modes
-
-interactive_mode(): Handles continuous conversation.
-
-single_query_mode(): Processes one query.
-
-file_mode(): Reads and processes file-based prompts.
-
-Entry Point
-
-main(): Uses argparse to select the mode and run it.
-
-5. User Guide
-Run in Interactive Mode (Default)
-bash
-Copy
-Edit
-python main.py
-or
-
-bash
-Copy
-Edit
-python main.py -i
-Run Single Query Mode
-bash
-Copy
-Edit
-python main.py "What is recursion?"
-Run File Mode
 bash
 Copy
 Edit
 python main.py -f prompt.txt
-Check Version
+Show version:
+
 bash
 Copy
 Edit
 python main.py --version
-6. Error Handling
-Missing File: Displays a clear error message if the file does not exist.
+Server/port not required — this is a local CLI tool.
 
-Empty Input: Ignores and waits for valid input.
+How it works
+CLI → [ Argument parsing ] → chooses one of:
 
-Keyboard Interrupt / EOF: Gracefully exits with a goodbye message.
+Interactive loop: show banner → load agent → read user input → agent.invoke → print response
 
-Colorama Import Failure: Falls back to non-colored output.
+Single-query: load agent → send single prompt → print response
 
-7. Potential Enhancements
-Command History (store and recall previous queries in interactive mode).
+File-mode: read file → send its contents as prompt → print response
 
-Logging (save queries and responses to a file).
+Key flow:
 
-Multiple File Processing (batch file queries).
+main() parses args with argparse
 
-Config File Support for setting default modes or styles.
+Depending on args, calls interactive_mode(), single_query_mode() or file_mode()
 
-Progress Indicators while AI processes requests.
+load_agent() is expected to initialize the AI backend (API keys, model, etc.)
 
-8. Conclusion
-The AI-Powered Coder Agent CLI is a robust, lightweight, and developer-friendly terminal-based AI tool. Its modular design, multi-mode support, and polished UI make it suitable for real-world coding assistance, educational use, and quick AI-powered development workflows.
+agent.invoke({"messages":[{...}]}) returns a response dict; last message content is printed
 
+Project Structure (suggested)
+bash
+Copy
+Edit
+cli-coder-agent/
+├── main.py                # CLI entrypoint (the code you provided)
+├── agent.py               # load_agent() implementation — connects to AI model
+├── README.md
+├── requirements.txt
+├── src/                   # optional: processing utilities, prompt templates, logging
+│   ├── prompts.py
+│   └── utils.py
+└── tests/                 # optional unit tests
+    └── test_cli.py
+Example main.py usage snippets
+Interactive: displays ASCII banner and colors (if colorama installed), keeps a loop until quit|exit|q.
+
+Single query: prints the AI response and exits.
+
+File mode: reads file content and treats entire content as the prompt.
+
+Future Improvements
+Command history and up-arrow navigation (readline on *nix, pyreadline or prompt_toolkit on Windows)
+
+Logging of prompts & responses (with opt-in privacy setting)
+
+Config file (~/.coder-agent/config.json) for defaults (agent, model, verbosity)
+
+Multiple agent backends (OpenAI, local LLMs, Google GenAI) selectable by flag
+
+Batch file processing and output formatting (JSON / markdown)
+
+Plugin system for code execution, formatting, or running linters
+
+Credits
+CLI UX & terminal styling: colorama (fallback to plain text)
+
+AI backend: agent.load_agent() (user-provided — wire your preferred model)
+
+Project structure & orchestration: Python standard library (argparse, os, sys)
+
+If you’d like, I can:
+
+produce a one-page PDF of this report,
+
+adapt it into a README.md ready for GitHub,
+
+or convert it into a short README + quickstart shell script for easy onboarding.
