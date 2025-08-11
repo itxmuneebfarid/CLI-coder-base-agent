@@ -54,7 +54,7 @@ pip install -r requirements.txt
 Ensure your AI agent module is available and implements:
 # loading agent
 from agent import load_agent
-# load_agent() -> returns an object with .invoke({"messages":[...]}) -> response dict
+load_agent() -> returns an object with .invoke({"messages":[...]}) -> response dict
 Place the provided main.py in your project root (or adapt as needed).
 
 # How it works
@@ -110,6 +110,7 @@ Plugin system for code execution, formatting, or running linters
 AI backend: agent.load_agent() (user-provided — wire your preferred model)
 
 Project structure & orchestration: Python standard library (argparse, os, sys)
+
 
 
 
