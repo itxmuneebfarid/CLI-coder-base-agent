@@ -78,6 +78,7 @@ agent.invoke({"messages":[{...}]}) returns a response dict; last message content
 
 # Project Structure (suggested)
 
+```
 cli-coder-agent/
 ├── main.py                # CLI entrypoint (the code you provided)
 ├── agent.py               # load_agent() implementation — connects to AI model
@@ -88,6 +89,7 @@ cli-coder-agent/
 │   └── utils.py
 └── tests/                 # optional unit tests
     └── test_cli.py
+```
 Example main.py usage snippets
 Interactive: displays ASCII banner and colors (if colorama installed), keeps a loop until quit|exit|q.
 
@@ -119,6 +121,7 @@ Script automation
 AI-assisted development workflows
 
 By keeping dependencies minimal and the interface intuitive, it offers a practical balance between power and simplicity.
+
 
 
 
