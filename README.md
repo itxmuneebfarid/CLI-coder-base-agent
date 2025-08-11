@@ -1,20 +1,20 @@
-CLI Coder-Based Agent — AI-Powered Command Line Coding Assistant
+# CLI Coder-Based Agent — AI-Powered Command Line Coding Assistant
 Convert terminal prompts into helpful coding answers, suggestions, and tooling support using a simple CLI built around an AI agent. Ideal for developers who prefer quick, keyboard-first interactions with an assistant while coding.
 
-Features
+# Features
 Interactive conversational CLI with welcome banner and colored output
 
-Single-query mode (one-off prompts from command line)
+# Single-query mode (one-off prompts from command line)
 
-File mode: read prompt from a file and return AI response
+# File mode: read prompt from a file and return AI response
 
 Graceful handling of Ctrl+C / EOF and missing files
 
 Colorized output using colorama with a plain-text fallback
 
-Version flag (--version) and cross-platform terminal-clear support
+# Version flag (--version) and cross-platform terminal-clear support
 
-Requirements
+# Requirements
 Python 3.8+
 
 argparse, sys, os (standard)
@@ -25,18 +25,18 @@ Your AI agent implementation exposing load_agent() and agent.invoke(...)
 
 (Optional) virtualenv or venv for an isolated environment
 
-Example requirements.txt:
+# Example requirements.txt:
 
 nginx
 Copy
 Edit
 colorama
-# plus whatever your agent needs, e.g.:
-# openai
-# langchain
-# langchain-google-genai
+plus whatever your agent needs, e.g.:
+openai
+langchain
+ langchain-google-genai
 Setup Instructions
-Create & activate a virtual environment
+# Create & activate a virtual environment
 macOS / Linux:
 
 bash
@@ -49,7 +49,7 @@ Windows (PowerShell):
 powershell
 Copy
 Edit
-python -m venv venv
+# python -m venv venv
 .\venv\Scripts\Activate.ps1
 Install dependencies:
 
@@ -95,7 +95,7 @@ Edit
 python main.py --version
 Server/port not required — this is a local CLI tool.
 
-How it works
+# How it works
 CLI → [ Argument parsing ] → chooses one of:
 
 Interactive loop: show banner → load agent → read user input → agent.invoke → print response
@@ -148,7 +148,7 @@ Batch file processing and output formatting (JSON / markdown)
 
 Plugin system for code execution, formatting, or running linters
 
-Credits
+# Credits
 CLI UX & terminal styling: colorama (fallback to plain text)
 
 AI backend: agent.load_agent() (user-provided — wire your preferred model)
@@ -162,3 +162,4 @@ produce a one-page PDF of this report,
 adapt it into a README.md ready for GitHub,
 
 or convert it into a short README + quickstart shell script for easy onboarding.
+
